@@ -18,7 +18,7 @@ jobs:
       - name: Install Dependencies
         run: |
           # Install flake8 locally for the user
-          pip install --user -r requirements.txt
+          python3 -m pip install --user -r requirements.txt
 
       - name: Run Syntax Check (Flake8)
         run: |
