@@ -18,10 +18,13 @@ jobs:
       - name: Install Dependencies
         run: |
           # Install flake8 locally for the user
-          sudo apt-get install python3-venv -y
-          pip install -r requirements.txt
+          #sudo apt install python3-pip -y
+          sudo apt install python3-venv -y
+          python -m venv venv
           source ./venv/bin/activate
-
+          #python3 -m pip install --user -r requirements.txt --break-system-packages # break
+          pip install flake8
+          
       - name: Run Syntax Check (Flake8)
         run: |
           echo "Running Linter on Development Server..."
