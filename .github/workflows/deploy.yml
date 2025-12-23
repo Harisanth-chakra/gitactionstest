@@ -24,20 +24,17 @@ jobs:
             python3 -m venv venv
           fi
 
-          # 2. Upgrade pip inside the venv
           ./venv/bin/pip install --upgrade pip
 
-          # 3. Install requirements inside the venv
-          # Notice: No sudo, no --break-system-packages needed here
           ./venv/bin/pip install -r requirements.txt
 
       - name: Run python script
         run: |
           echo "Running Linter using venv..."
           
-          # DIRECTLY call the python binary inside the venv
-          # This automatically uses the installed libraries
+          
           ./venv/bin/python ./app.py
+          ./venv/bin/python ./test.py
           
           echo "Linter Passed. Proceeding to Deployment."
 
