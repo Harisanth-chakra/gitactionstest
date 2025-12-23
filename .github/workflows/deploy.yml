@@ -5,28 +5,63 @@ on:
     branches: [ "main" ]
 
 jobs:
+  # # ----------------------------------------------------------------
+  # # JOB 1: LINT (Development Server)
+  # # Path: /home/chakra/Documents/CICD_TEST/actions-runner/_work/gitactionstest
+  # # ----------------------------------------------------------------
+  # lint-code:
+  #   runs-on: [self-hosted, local-dev]
+  #   steps:
+  #     - name: Checkout Code from GitHub
+  #       uses: actions/checkout@v4
+
+  #     - name: Install Dependencies
+  #       run: |
+  #         # Install flake8 locally for the user
+  #         sudo apt install python3-pip -y
+  #         python3 -m pip install --user -r requirements.txt --break-system-packages # break
+          
+
+  #     - name: Run python script
+  #       run: |
+  #         echo "Running Linter on Development Server..."
+  #         # This checks for syntax errors. If it fails, deployment will NOT happen.
+  #         python3 ./app.py
+  #         echo "Linter Passed. Proceeding to Deployment."
   # ----------------------------------------------------------------
   # JOB 1: LINT (Development Server)
-  # Path: /home/chakra/Documents/CICD_TEST/actions-runner/_work/gitactionstest
   # ----------------------------------------------------------------
   lint-code:
     runs-on: [self-hosted, local-dev]
     steps:
       - name: Checkout Code from GitHub
         uses: actions/checkout@v4
-
+        with:
+          clean: false  # <--- CRITICAL: This prevents GitHub from deleting your venv folder
+          
       - name: Install Dependencies
         run: |
-          # Install flake8 locally for the user
-          sudo apt install python3-pip -y
-          python3 -m pip install --user -r requirements.txt --break-system-packages # break
-          
+          # 1. Create venv if it doesn't exist (Safety check)
+          if [ ! -d "venv" ]; then
+            echo "Creating new venv..."
+            python3 -m venv venv
+          fi
+
+          # 2. Upgrade pip inside the venv
+          ./venv/bin/pip install --upgrade pip
+
+          # 3. Install requirements inside the venv
+          # Notice: No sudo, no --break-system-packages needed here
+          ./venv/bin/pip install -r requirements.txt
 
       - name: Run python script
         run: |
-          echo "Running Linter on Development Server..."
-          # This checks for syntax errors. If it fails, deployment will NOT happen.
-          python3 ./app.py
+          echo "Running Linter using venv..."
+          
+          # DIRECTLY call the python binary inside the venv
+          # This automatically uses the installed libraries
+          ./venv/bin/python ./app.py
+          
           echo "Linter Passed. Proceeding to Deployment."
 
   # ----------------------------------------------------------------
