@@ -5,29 +5,6 @@ on:
     branches: [ "main" ]
 
 jobs:
-  # # ----------------------------------------------------------------
-  # # JOB 1: LINT (Development Server)
-  # # Path: /home/chakra/Documents/CICD_TEST/actions-runner/_work/gitactionstest
-  # # ----------------------------------------------------------------
-  # lint-code:
-  #   runs-on: [self-hosted, local-dev]
-  #   steps:
-  #     - name: Checkout Code from GitHub
-  #       uses: actions/checkout@v4
-
-  #     - name: Install Dependencies
-  #       run: |
-  #         # Install flake8 locally for the user
-  #         sudo apt install python3-pip -y
-  #         python3 -m pip install --user -r requirements.txt --break-system-packages # break
-          
-
-  #     - name: Run python script
-  #       run: |
-  #         echo "Running Linter on Development Server..."
-  #         # This checks for syntax errors. If it fails, deployment will NOT happen.
-  #         python3 ./app.py
-  #         echo "Linter Passed. Proceeding to Deployment."
   # ----------------------------------------------------------------
   # JOB 1: LINT (Development Server)
   # ----------------------------------------------------------------
