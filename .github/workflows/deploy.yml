@@ -19,7 +19,7 @@ jobs:
         run: |
           # Install flake8 locally for the user
           sudo apt install python3-pip -y
-          python3 -m pip install --user -r requirements.txt --break-system-packages
+          python3 -m pip install --user -r requirements.txt --break-system-packages # break
 
       - name: Run Syntax Check (Flake8)
         run: |
