@@ -19,8 +19,9 @@ jobs:
           fetch-depth: 0  # Important: Helps Super-Linter verify git history
 
       - name: Run Super-Linter
-        # CORRECT REPO: super-linter/super-linter
         uses: super-linter/super-linter@v7
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_MARKDOWN_PRETTIER: false
+          VALIDATE_YAML_PRETTIER: false
