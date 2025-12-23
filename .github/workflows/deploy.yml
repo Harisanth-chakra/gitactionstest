@@ -18,8 +18,9 @@ jobs:
       - name: Install Dependencies
         run: |
           # Install flake8 locally for the user
-          sudo apt install python3-pip -y
-          python3 -m pip install --user -r requirements.txt --break-system-packages # break
+          # sudo apt install python3-pip -y
+          # python3 -m pip install --user -r requirements.txt --break-system-packages # break
+          source ./venv/bin/activate
 
       - name: Run Syntax Check (Flake8)
         run: |
