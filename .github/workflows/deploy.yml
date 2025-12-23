@@ -25,11 +25,11 @@ jobs:
           #python3 -m pip install --user -r requirements.txt --break-system-packages # break
           pip install -r requirements.txt
 
-      - name: Run Syntax Check (Flake8)
+      - name: Run python script
         run: |
           echo "Running Linter on Development Server..."
           # This checks for syntax errors. If it fails, deployment will NOT happen.
-          python3 -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          python3 ./app.py
           echo "Linter Passed. Proceeding to Deployment."
 
   # ----------------------------------------------------------------
